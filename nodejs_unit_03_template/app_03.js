@@ -39,14 +39,30 @@ f4(a,b)
 // Пример 2020-03-22
 
 const f5 = () => {
-    let data = Date.now();
-    console.log(data);
-    return data;
+    let date = new Date();
+    let y = date.getUTCFullYear();
+    let m = date.getMonth() + 1;
+    let d = date.getDate();
+    if(m < 10) m = `0${m}`
+    if(d < 10) d = `0${d}`
+  
+    console.log(`${y}-${m}-${d}`);
+    return `${y}-${m}-${d}`;
+
 }
 f5()
 
 //Task 6. Напишите функцию f6, которая проверяет является ли введенный год високосным. Возвращает true если да, и false если нет. 
 
 const f6 = (year) => {
-
+    let date = new Date(year, 2, 0);
+    if (date.getDate() === 29) {
+        console.log(true);
+        return true
+    } else {
+        console.log(false);
+        return false
+    }
 }
+
+f6(2015)
