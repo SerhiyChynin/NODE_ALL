@@ -17,3 +17,11 @@ for (let i = 5; i >= 0; i--) {
     out += i + ' ';
 }
 console.log(out);
+
+let d = [3, 4, 5];
+let e = d.map(elem => elem * 3);
+console.log(e);
+
+const f = { one: 33, two: 44, three:'hello', four: 5};
+f.one = 2222
+console.log(f)
