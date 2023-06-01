@@ -136,8 +136,13 @@ console.log(t9('unit_06/home6/', 't1.txt'));
 // Создайте функцию t10, которая принимает имя файла и которая возвращает false если файла нет в текущей папке или его размер равен нулю и размер файла если он существует и его размер больше нуля.
 
 function t10(a) {
-
+    let data = fs.readdirSync('unit_06/', 'utf-8');
+    if (data.includes(a) && fs.statSync('unit_06/' + a).size > 0) {
+        return fs.statSync('unit_06/' + a).size;
+    } else {
+        return false;
+    }
 }
 
-console.log(t10('filename'));
+console.log(t10('app_06.js'));
 
