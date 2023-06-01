@@ -15,7 +15,7 @@ const path = require('path'); //разширение для работы с пу
 fs.readdir('one', (err, data) => {
     console.log(data)
     data.forEach(file => {
-        console.log(file + '\t\t' + path.extname(file) + '\t\t' + fs.statSync('one/' + file).size + ' b')
+        console.log(file + '\t\t' + path.extname(file) + '\t\t ' + fs.statSync('one/' + file).size + ' b')
     })
 })
 
