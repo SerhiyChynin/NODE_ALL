@@ -10,43 +10,96 @@ const conn = mysql.createConnection({
 });
 
 conn.connect(err => {
-    if(err){
+    if (err) {
         console.log(err);
         return err
-    }
-    else {
+    } else {
         console.log('DB - Work!');
     }
 });
 
 
-
 function f2(req, res) {
     let urlReq = url.parse(req.url, true);
     let email = urlReq.query.email;
-    console.log(email);
 
     let query = 'SELECT * FROM user where email LIKE "%' + email + '%"';
-    console.log(query);
 
     // тут важно не перепутать res - уже есть в функции как аргумент
     conn.query(query, (err, result) => {
-        result  = result.map(item => item.firstname);
+        result = result.map(item => item.firstname);
         res.end(JSON.stringify(result));
     });
 }
 
+function f3(req, res) {
+    let query = 'SELECT * FROM user';
+    conn.query(query, (err, result) => {
+        result = result.map(item => item.email);
+        res.end(JSON.stringify(result));
+    });
+};
+
+function f4(req, res) {
+    let urlReq = url.parse(req.url, true);
+    let email = urlReq.query.email;
+
+    let query = 'SELECT * FROM user';
+
+    conn.query(query, (err, result) => {
+        resEm = result.map(item => item.email);
+        if (resEm.includes(email)) {
+            for (let key in result) {
+                if (result[key].email == email) {
+                    res.end(JSON.stringify(result[key].id));
+                }
+            }
+        } else {
+            res.end('0');
+        }
+    })
+}
+function f5(req, res){
+    let urlReq = url.parse(req.url, true);
+    let email = urlReq.query.email;
+    let query = 'SELECT * FROM user';
+    conn.query(query, (err, result) => {
+        resEm = result.map(item => item.email);
+        let RES = resEm.filter(item => item.includes('k') );
+        console.log(RES)
+        console.log(result)
+        if (resEm.includes(RES[0])) {
+        console.log('yes')}
+            // console.log(result)
+            // for (let key in result) {
+            //     if (result[key].email.includes(RES)) {
+            //         console.log('yes')
+            //         res.end(JSON.stringify(result[key].id));
+            //     }
+            // }
+        // } else {
+        //     res.end('0');
+        // }
+            // res.end(JSON.stringify(RES))
+
+
+    })
+}
+
 
 http.createServer((req, res) => {
-    if(req.method == 'GET'){
+    if (req.method == 'GET') {
         let urlReq = url.parse(req.url, true);
         let task = urlReq.query.task;
-        if(task == 2){
-            // res.end('array');
-            console.log('task2');
+        if (task == 2) {
             f2(req, res);
+        } else if (task == 3) {
+            f3(req, res);
+        } else if (task == 4) {
+            f4(req, res);
+        } else if (task == 5) {
+            f5(req, res);
         }
-
     }
 }).listen(3000);
 
