@@ -59,31 +59,21 @@ function f4(req, res) {
         }
     })
 }
-function f5(req, res){
-    let urlReq = url.parse(req.url, true);
-    let email = urlReq.query.email;
+
+function f5(req, res) {
     let query = 'SELECT * FROM user';
+    let id = [];
     conn.query(query, (err, result) => {
-        resEm = result.map(item => item.email);
-        let RES = resEm.filter(item => item.includes('k') );
-        console.log(RES)
-        console.log(result)
-        if (resEm.includes(RES[0])) {
-        console.log('yes')}
-            // console.log(result)
-            // for (let key in result) {
-            //     if (result[key].email.includes(RES)) {
-            //         console.log('yes')
-            //         res.end(JSON.stringify(result[key].id));
-            //     }
-            // }
-        // } else {
-        //     res.end('0');
-        // }
-            // res.end(JSON.stringify(RES))
-
-
-    })
+            mail = result.map(item => item.email);
+            result.map(item => {
+                let RES = mail.filter(item => item.includes('k'));
+                if (RES.includes(item.email)) {
+                    id.push(item.id);
+                }
+            })
+            res.end(JSON.stringify(id))
+        }
+    )
 }
 
 
