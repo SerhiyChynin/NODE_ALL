@@ -64,7 +64,7 @@ function f5(req, res) {
     let query = 'SELECT * FROM user';
     let id = [];
     conn.query(query, (err, result) => {
-            mail = result.map(item => item.email);
+            let mail = result.map(item => item.email);
             result.map(item => {
                 let RES = mail.filter(item => item.includes('k'));
                 if (RES.includes(item.email)) {
