@@ -117,14 +117,13 @@ async function f6() {
     rows.map(item => {
         if(item.email == 'al@em'){
         name = item.firstname;
-        console.log(name)
             }  else if(item.lastname =='Bro'){
             name2 = item.lastname;
-            console.log(name2)
         }
     });
     await conn.execute('update user set firstname="'+name+'"where lastname ="'+name2+'"');
-    console.log()
+    conn.end();
+    return name;
 }
 
-f6() //- для проверки расскоментируйте, потом верните комментарий на место.
+// f6() //- для проверки расскоментируйте, потом верните комментарий на место.
