@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="//fonts.googleapis.com/css?family=Arimo:ital,wght@0,400;0,700;1,400;1,700Roboto:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+
+    <!-- Favicon ––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="title site-title text-center">Загрузка файлов на сервер, pure node.js</h1>
+    <h2 class="sub-title text-center">ItGid.info Node.js (часть 1)</h2>
+    <img src="./images/icon.png" alt="" class="icon-image">
+    <hr>
+    <form>
+        <div>
+            <input class="hidden" id="upload" type="file">
+        </div>
+        <div>
+            <input type="text" name="image" placeholder="Название изображения">
+            <input type="hidden" name="imagename" value="">
+        </div>
+        <div>
+            <label for="upload" class="button">Submit</label>
+        </div>
+    </form>
+    <hr>
+    <footer>
+        <p>2020 &copy; ItGid.info</p>
+    </footer>
+</div>
+
+<script src="./js/upload.js"></script>
+</body>
+</html>

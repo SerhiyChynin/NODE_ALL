@@ -7,7 +7,8 @@ http.createServer((req, res) => {
     if (req.url == '/') {
         sendRes('index.html', 'text/html', res);
     } else if (/\/uploads\/[^\/]+$/.test(req.url) && req.method == 'POST') {
-
+        console.log('upload files');
+        saveUploadFile(req, res);
     } else {
         sendRes(req.url, getContentType(req.url), res);
     }
@@ -45,4 +46,28 @@ function getContentType(url) {
         default:
             return "application/octate-stream";
     }
+}
+
+function saveUploadFile(req, res) {
+    let fileName = path.basename(req.url);
+    let file = path.join(__dirname, 'uploads', fileName);
+    let imageFolder = path.join(__dirname, 'static/images', fileName);
+
+    req.pipe(fs.createWriteStream(file));
+    req.on('end', () => {
+        fs.copyFile(file, imageFolder, err => {
+            if (err) {
+                console.log(err);
+            }
+            fs.unlink(file, err => {
+                if (err) {
+                    console.log(err);
+                }
+            })
+        });
+        res.writeHead(200, {'Content-Type': 'text'});
+        res.write(fileName);
+        res.end();
+    });
+
 }
