@@ -10,6 +10,7 @@ module.exports = function (a, b) {
             return accum;
         }, {})
     }
+
     return b
 }
 
